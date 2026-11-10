@@ -1,0 +1,64 @@
+{
+  "app": "UKin Focus Timer Universal",
+  "version": 3,
+  "exportedAt": "2026-11-11T00:00:00+07:00",
+  "moduleTitle": "Diva — UKin SAKUNALAR | Literasi Finansial Kelas IX",
+  "modelName": "Problem Based Learning (PBL)",
+  "target": 80,
+  "options": {
+    "auto": true,
+    "sound": false,
+    "wake": false
+  },
+  "stages": [
+    {
+      "id": "diva-pendahuluan",
+      "name": "Pendahuluan",
+      "short": "PENDAHULUAN",
+      "cue": "Salam, doa, presensi; Butuh vs Ingin; apersepsi uang saku; video 15 detik; motivasi dan tujuan.",
+      "minutes": 8.0
+    },
+    {
+      "id": "diva-sintaks-1",
+      "name": "Orientasi Masalah",
+      "short": "SINTAKS 1 · MEMAHAMI",
+      "cue": "Murid mengingat video, mengidentifikasi fakta masalah dan akibat pilihan, lalu mendapat penguatan konsep finansial.",
+      "minutes": 6.0
+    },
+    {
+      "id": "diva-sintaks-2",
+      "name": "Mengorganisasi Murid",
+      "short": "SINTAKS 2 · MEMAHAMI",
+      "cue": "Bentuk enam kelompok dan empat peran; buka SAKUNALAR dan pahami petunjuk LKM serta presentasi.",
+      "minutes": 4.0
+    },
+    {
+      "id": "diva-sintaks-3",
+      "name": "Penyelidikan Kelompok",
+      "short": "SINTAKS 3 · MEMAHAMI & MENGAPLIKASI",
+      "cue": "Murid membaca komik dan Bank Materi, menemukan dua fakta, lalu menganalisis kasus dan solusi pada LKM.",
+      "minutes": 20.0
+    },
+    {
+      "id": "diva-sintaks-4",
+      "name": "Penyajian Hasil",
+      "short": "SINTAKS 4 · MENGAPLIKASI",
+      "cue": "Jelaskan aturan, lalu keenam kelompok mempresentasikan masalah, fakta, dua solusi, dan keputusan beserta tanya jawab.",
+      "minutes": 17.0
+    },
+    {
+      "id": "diva-sintaks-5",
+      "name": "Analisis & Evaluasi",
+      "short": "SINTAKS 5 · MENGAPLIKASI & MEREFLEKSI",
+      "cue": "Evaluasi hasil presentasi; bahas enam kartu keputusan dan simulasi skala prioritas uang saku bersama murid.",
+      "minutes": 15.0
+    },
+    {
+      "id": "diva-penutup",
+      "name": "Penutup",
+      "short": "PENUTUP",
+      "cue": "Asesmen digital dan Kode Hasil, Exit Ticket individu, kesimpulan, apresiasi, tindak lanjut, dan salam penutup.",
+      "minutes": 10.0
+    }
+  ]
+}
