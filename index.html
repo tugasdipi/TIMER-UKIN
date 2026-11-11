@@ -1,0 +1,994 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#09172a">
+  <meta name="description" content="Timer UKin PPG Calon Guru fleksibel untuk semua model pembelajaran. Identitas preset milik Diva hanya di editor, bukan monitor. Kustomisasi semua tahap, kegiatan, dan alokasi 60–90 menit.">
+  <title>UKin Timer — EXECUTE Diva dan Bayu</title>
+  <style>
+    :root { --bg:#081424; --panel:#10223a; --panel2:#142945; --line:#28425d; --white:#f6f7fb; --muted:#a6b7ce; --gold:#e9c781; --cyan:#71dcdb; --red:#ff9e8f; --green:#a5e4bb; --shadow:0 18px 55px rgba(0,0,0,.23); }
+    * {box-sizing:border-box}
+    html {background:var(--bg);scroll-behavior:smooth}
+    body {margin:0;min-height:100vh;color:var(--white);font:15px/1.5 Inter,"Segoe UI",system-ui,-apple-system,sans-serif;background:radial-gradient(ellipse 780px 520px at 12% 0%,#15304e 0%,transparent 70%),radial-gradient(ellipse 700px 510px at 95% 95%,#112746 0%,transparent 70%),var(--bg)}
+    button,input,textarea {font:inherit}
+    button {cursor:pointer}
+    button:disabled {opacity:.45;cursor:not-allowed}
+    button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible {outline:3px solid var(--gold);outline-offset:3px}
+    .shell {max-width:1580px;margin:0 auto;padding:25px 28px 36px}
+    .topbar {display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:24px}
+    .identity {display:flex;gap:13px;align-items:center}
+    .mark {width:47px;height:47px;display:grid;place-items:center;border:1px solid #7a6a50;border-radius:15px;background:linear-gradient(145deg,#273e56,#182638);color:var(--gold);font-size:25px;font-weight:850;box-shadow:0 3px 25px #0003}
+    .eyebrow {font-size:11px;color:var(--gold);font-weight:850;letter-spacing:.16em;text-transform:uppercase}
+    .identity h1 {font-size:22px;font-weight:800;line-height:1.15;margin:3px 0 0;letter-spacing:-.03em}
+    .universal-tag{display:inline-flex;vertical-align:middle;align-items:center;margin-left:6px;padding:3px 7px;border-radius:7px;border:1px solid #55768a;color:var(--cyan);background:#244254;font-size:9px;letter-spacing:.12em;font-weight:900}
+    .topactions {display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+    .button {border:1px solid var(--line);border-radius:12px;background:#182c46;color:var(--white);padding:11px 14px;font-weight:700;transition:background .15s,border-color .15s,transform .15s}
+    .button:hover:not(:disabled) {background:#25415d;border-color:#3e6584;transform:translateY(-1px)}
+    .button.primary {color:#0a1b27;background:linear-gradient(135deg,#f4d89a,#e8bc6d);border-color:#f5d58b}
+    .button.primary:hover:not(:disabled) {background:#fce4b0}
+    .button.ghost {background:transparent}
+    .button.danger {color:#f8b1a4;border-color:#673f4b}
+    .small {padding:8px 12px;font-size:13px}
+    .presets {display:flex;align-items:center;justify-content:space-between;gap:17px;flex-wrap:wrap;background:#10233b99;border:1px solid #2a4460;border-radius:19px;padding:17px 21px;margin-bottom:18px}
+    .preset-left {display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+    .section-label {font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:800;color:var(--muted)}
+    .preset-buttons {display:flex;gap:7px;flex-wrap:wrap}
+    .preset {padding:10px 16px;border:1px solid #3a5371;background:#152b45;color:#e7f1fc;border-radius:10px;font-weight:750;min-width:91px}
+    .preset[aria-pressed="true"] {border-color:var(--gold);background:#e9c781;color:#1d2531;box-shadow:0 3px 22px #e9c78122}
+    .preset-right {display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+    .totals-chip {font-variant-numeric:tabular-nums;font-weight:800;padding:8px 12px;background:#18354b;border:1px solid #31605f;border-radius:10px;color:var(--green);font-size:13px}
+    .totals-chip.bad {background:#493329;border-color:#94634b;color:#ffd29a}
+    .layout {display:grid;grid-template-columns:minmax(0,1.26fr) minmax(390px,.93fr);gap:18px;align-items:start}
+    .card {background:linear-gradient(150deg,#142941,#0d2035);border:1px solid #2b4560;border-radius:22px;box-shadow:var(--shadow);overflow:hidden}
+    .timer-card {min-height:650px;display:flex;flex-direction:column;position:relative}
+    .timer-card::before {content:"";pointer-events:none;position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),var(--cyan),transparent)}
+    .timer-head {display:flex;justify-content:space-between;align-items:center;padding:25px 27px 9px;gap:12px}
+    .status {display:flex;align-items:center;gap:9px;text-transform:uppercase;font-size:11px;letter-spacing:.11em;color:#b9cada;font-weight:900}
+    .dot {width:9px;height:9px;border-radius:50%;background:var(--gold)}
+    .status.running .dot {background:#7de0bc;box-shadow:0 0 0 5px #76e6bd1c;animation:pulse 2s infinite}
+    .status.ended .dot {background:var(--red)}
+    @keyframes pulse{50% {box-shadow:0 0 0 9px #76e6bd06}}
+    .step-count {color:var(--muted);font-size:13px;font-weight:700}
+    .timer-main {text-align:center;padding:20px 29px 14px;flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center}
+    .stage-kicker {text-transform:uppercase;letter-spacing:.16em;font-size:12px;font-weight:850;color:var(--gold)}
+    .stage-title {font-size:clamp(23px,2.9vw,38px);line-height:1.18;font-weight:850;letter-spacing:-.025em;margin:12px 0 4px;max-width:740px;text-wrap:balance;overflow-wrap:anywhere}
+    .stage-cue {color:#d7e3f0;font-size:clamp(18px,1.6vw,24px);line-height:1.45;max-width:760px;min-height:58px;margin:10px 0 8px;text-wrap:balance;font-weight:600}
+    .digits {font-family:ui-monospace,"SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:clamp(76px,9vw,156px);letter-spacing:-.08em;line-height:1.22;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap;color:#fff;text-shadow:0 9px 46px #72dee020;margin:19px 0 14px;padding-right:.08em}
+    .digits.warning {color:#ffd19d;text-shadow:0 6px 30px #ffbd6435}
+    .digits.ended {color:#ffada1;text-shadow:0 7px 30px #ff9c9c26}
+    .phase-progress {height:9px;width:min(100%,620px);background:#243b52;border-radius:30px;overflow:hidden}
+    .phase-progress > div {background:linear-gradient(90deg,#64dad8,#e9c781);height:100%;width:0%;border-radius:inherit;transition:width .3s}
+    .phase-progress-meta {width:min(100%,620px);display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin:9px 0 6px;font-variant-numeric:tabular-nums}
+    .next-box {padding:12px 16px;margin-top:21px;max-width:590px;background:#20344d;border:1px solid #2a4763;border-radius:13px;color:#c8d7e5;font-size:14px}
+    .next-box strong {color:#fff;font-weight:750}
+    .timer-controls {display:flex;justify-content:center;gap:10px;flex-wrap:wrap;padding:19px 24px 8px}
+    .timer-controls .button {min-height:49px}
+    .timer-controls .play {min-width:176px}
+    .timer-bottom {display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin:14px 24px 26px;padding:19px 3px 0;border-top:1px solid #33475d}
+    .metric {text-align:center;border-right:1px solid #2d455d}
+    .metric:last-child {border-right:0}
+    .metric strong {font-size:25px;letter-spacing:-.035em;display:block;font-variant-numeric:tabular-nums}
+    .metric span {font-size:12px;color:var(--muted);display:block;margin-top:2px}
+    .side-panel {display:flex;flex-direction:column;gap:15px}
+    .side-head {display:flex;align-items:center;justify-content:space-between;gap:9px;padding:16px 17px 10px}
+    .side-head h2 {font-size:17px;margin:0;letter-spacing:-.02em}
+    .stages {padding:0 11px 12px;display:flex;flex-direction:column;gap:6px;max-height:560px;overflow:auto}
+    .stage-row {display:grid;grid-template-columns:40px minmax(0,1fr) 85px;gap:9px;align-items:center;padding:10px 10px;border-radius:13px;background:#12273e;border:1px solid transparent;transition:background .15s}
+    .stage-row.active {border-color:#bd9f63;background:#283548}
+    .stage-row.completed:not(.active) {background:#142f38}
+    .jump {width:33px;height:33px;border:1px solid #42607b;background:#1c3954;border-radius:10px;color:var(--white);font-weight:850;font-size:13px}
+    .stage-row.active .jump {background:var(--gold);border-color:var(--gold);color:#14253b}
+    .stage-row.completed:not(.active) .jump {color:var(--green)}
+    .stage-fields {min-width:0}
+    .phase-name {width:100%;padding:3px 2px;background:transparent;color:#f8fbff;border:1px solid transparent;border-radius:4px;font-size:14px;font-weight:750;min-width:0;text-overflow:ellipsis}
+    .phase-name:hover,.phase-name:focus {border-color:#60748b;background:#101e30}
+    .phase-sub {font-size:11px;color:#9cb0c5;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;padding-left:2px}
+    .module-fields {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:9px;padding:0 17px 12px}
+    .module-edit {min-width:0}
+    .module-edit label {font-size:11px;font-weight:750;color:var(--muted);display:block;margin-bottom:4px}
+    .module-edit input {width:100%;min-width:0;padding:9px 11px;border:1px solid #3b5670;background:#0b1c2e;border-radius:9px;color:#f9fbff;font-size:13px;font-weight:650}
+    .module-edit input::placeholder {color:#7e96ae;font-weight:450}
+    .stage-details {grid-column:1/-1;border-top:1px solid #29445d;margin-top:5px;padding-top:6px;min-width:0}
+    .stage-details summary {list-style:none;cursor:pointer;font-size:11px;color:var(--gold);font-weight:750;padding:3px 4px}
+    .stage-details summary::-webkit-details-marker {display:none}
+    .stage-details summary::before {content:'✎  ';color:var(--gold)}
+    .editor-fields {display:grid;gap:10px;margin-top:10px}
+    .editor-fields label {font-size:11px;color:var(--muted);font-weight:700;display:grid;gap:5px}
+    .editor-fields input,.editor-fields textarea {width:100%;resize:vertical;border:1px solid #405c79;background:#091b30;color:#fff;border-radius:9px;padding:8px 10px;font-size:13px;font-weight:500;line-height:1.5}
+    .editor-fields textarea {min-height:78px}
+    .stage-actions {display:flex;gap:7px;flex-wrap:wrap}
+    .stage-actions .button {padding:7px 10px;font-size:12px}
+    .editor-toolbar {display:flex;gap:7px;padding:0 14px 13px;flex-wrap:wrap}
+    .tools-bottom {display:flex;gap:8px;flex-wrap:wrap;padding:2px 20px 16px}
+    .stage-cue {white-space:pre-line;overflow-wrap:anywhere}
+    .duration {position:relative}
+    .minute-input {width:100%;background:#091b30;border:1px solid #3a5470;border-radius:9px;padding:8px 24px 8px 7px;color:#fff;text-align:right;font-size:14px;font-weight:800;font-variant-numeric:tabular-nums;appearance:textfield;-moz-appearance:textfield}
+    .minute-input::-webkit-outer-spin-button,.minute-input::-webkit-inner-spin-button {-webkit-appearance:none;margin:0}
+    .unit {position:absolute;right:8px;top:50%;transform:translateY(-50%);color:#90a9c0;font-size:10px;pointer-events:none}
+    .config {padding:17px 20px 18px}
+    .config h3 {margin:0 0 13px;font-size:16px}
+    .setting {display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid #2b425a}
+    .setting:first-of-type {border-top:none}
+    .setting-name {color:#e7eff9;font-size:13px;font-weight:750}
+    .setting-help {color:#96acc1;font-size:11px;margin-top:2px}
+    .toggle {position:relative;display:inline-block;flex:0 0 45px;height:26px}
+    .toggle input {opacity:0;width:0;height:0;position:absolute}
+    .track {position:absolute;inset:0;border-radius:30px;background:#30445c;border:1px solid #4a627c;transition:background .2s}
+    .track::after {content:"";position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:#d3dde7;transition:transform .2s}
+    .toggle input:checked + .track {background:#c7a66a}
+    .toggle input:checked + .track::after {transform:translateX(19px);background:#162438}
+    .notice {display:none;position:fixed;bottom:18px;left:50%;transform:translateX(-50%);max-width:min(92vw,560px);z-index:1000;padding:13px 18px;border:1px solid #ac935e;background:#2a3445;color:#fff;border-radius:13px;box-shadow:0 10px 40px #000a;text-align:center;font-weight:700;font-size:13px}
+    .notice.show {display:block}
+    .focus-mode .presets,.focus-mode .side-panel {display:none}
+    .focus-mode .layout {grid-template-columns:1fr}
+    .focus-mode .timer-card {min-height:calc(100vh - 145px)}
+    .focus-mode .timer-main {padding:30px}
+    .focus-mode .digits {font-size:clamp(92px,14vw,245px)}
+    .focus-mode .stage-title {font-size:clamp(32px,4.2vw,58px)}
+    .focus-mode .stage-cue {font-size:clamp(22px,2.3vw,32px);max-width:900px;min-height:72px}
+    .focus-mode .next-box {font-size:16px}
+    @media(max-width:1080px) {.layout {grid-template-columns:1fr}.timer-card {min-height:600px}.stages {max-height:none}.side-panel{display:grid;grid-template-columns:1fr 1fr}.side-panel .card:first-child {grid-row:1 / 3}.side-panel .config {align-self:start}.side-panel > .card:nth-child(2) {height:max-content}}
+    @media(max-width:700px) {.shell{padding:15px 12px 22px}.topbar{margin-bottom:15px}.identity h1{font-size:18px}.mark{width:42px;height:42px}.presets{padding:13px}.preset{padding:9px 10px;min-width:70px}.layout{gap:12px}.side-panel{display:flex}.timer-head{padding:20px 18px 8px}.timer-card{min-height:565px}.timer-main{padding:10px 15px}.stage-title{font-size:25px}.stage-cue{font-size:16px;line-height:1.4;max-width:92vw;min-height:44px}.digits{font-size:clamp(63px,14vw,100px);margin:10px 0 9px}.timer-controls{padding:13px 12px 4px}.timer-controls .button{padding:10px 11px}.timer-controls .play{min-width:130px}.timer-bottom{margin:12px 15px 20px;gap:4px}.metric strong{font-size:19px}.metric span{font-size:11px}.stage-row{grid-template-columns:35px minmax(0,1fr) 78px;gap:6px;padding:9px 6px}.stage-row .jump{width:30px;height:31px}.focus-mode .timer-card{min-height:calc(100dvh - 175px)}.focus-mode .digits{font-size:clamp(68px,17vw,140px)}}
+    @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+    /* Ringkasan waktu selalu terlihat bersama timer tanpa perlu menggulir monitor. */
+    .timer-card {min-height:0}
+    .timer-head {padding:15px 21px 3px}
+    .timer-main {padding:8px 19px 4px}
+    .stage-title {font-size:clamp(23px,2.4vw,35px);margin:6px 0 1px}
+    .stage-cue {font-size:clamp(18px,1.5vw,24px);line-height:1.34;min-height:0;max-height:98px;overflow-y:auto;margin:6px 0 4px;scrollbar-width:thin}
+    .digits {font-size:clamp(70px,7vw,117px);line-height:1.06;margin:8px 0 7px}
+    .phase-progress-meta {margin:5px 0 3px}
+    .next-box {margin-top:9px;padding:8px 13px;font-size:13px}
+    .timer-controls {padding:8px 13px 3px;gap:7px}
+    .timer-controls .button {min-height:43px;padding:8px 11px;font-size:13px}
+    .timer-controls .play {min-width:152px}
+    .timer-bottom {margin:8px 18px 13px;padding:10px 0 0;gap:6px}
+    .metric strong {font-size:22px}
+    .metric span {font-size:11px;line-height:1.25}
+    .focus-mode .timer-card {min-height:0;max-height:calc(100dvh - 114px)}
+    .focus-mode .timer-main {padding:12px 22px 4px}
+    .focus-mode .stage-title {font-size:clamp(30px,3.5vw,50px)}
+    .focus-mode .stage-cue {font-size:clamp(21px,2vw,29px);line-height:1.35;max-height:115px;min-height:0}
+    .focus-mode .digits {font-size:clamp(82px,10.5vw,178px);line-height:1.05;margin:9px 0 8px}
+    .focus-mode .next-box {font-size:15px}
+    @media(max-height:820px) and (min-width:701px) {
+      .shell {padding-top:15px;padding-bottom:17px}
+      .topbar {margin-bottom:12px}
+      .presets {padding:10px 15px;margin-bottom:12px}
+      .preset {padding:7px 12px}
+      .timer-main {padding-top:6px}
+      .stage-cue {max-height:77px}
+      .digits {font-size:clamp(66px,6.5vw,103px);margin:5px 0}
+      .next-box {margin-top:6px}
+      .timer-controls {padding-top:6px}
+      .timer-bottom {margin-top:7px;margin-bottom:9px;padding-top:7px}
+      .focus-mode .timer-card {max-height:calc(100dvh - 79px)}
+      .focus-mode .stage-cue {max-height:98px}
+      .focus-mode .digits {font-size:clamp(85px,9.6vw,153px)}
+    }
+    @media(max-width:700px) {
+      .timer-card {min-height:0}
+      .timer-head {padding:13px 13px 3px}
+      .timer-main {padding:8px 12px 3px}
+      .stage-title {font-size:24px}
+      .stage-cue {font-size:17px;line-height:1.34;max-height:98px;min-height:0;margin:5px 0}
+      .digits {font-size:clamp(61px,13.3vw,90px);line-height:1.05;margin:8px 0}
+      .timer-controls {padding:9px 9px 3px}
+      .timer-controls .button {min-height:40px;padding:7px 9px;font-size:12px}
+      .timer-controls .play {min-width:105px}
+      .timer-bottom {margin:9px 9px 11px;padding:9px 0 0;gap:3px}
+      .metric strong {font-size:18px}
+      .metric span {font-size:10px}
+      .focus-mode .timer-card {min-height:0;max-height:calc(100dvh - 103px)}
+      .focus-mode .timer-main {padding:10px 11px 3px}
+      .focus-mode .stage-title {font-size:clamp(26px,6vw,34px)}
+      .focus-mode .stage-cue {font-size:clamp(19px,4.8vw,23px);max-height:115px;min-height:0}
+      .focus-mode .digits {font-size:clamp(62px,16vw,105px)}
+      .focus-mode .next-box {font-size:13px}
+    }
+
+    /* FIT LAYAR LAPTOP — Mode Fokus mengisi area tersisa hingga tepi bawah layar.
+       Header tetap di atas, tombol dan dua metrik terkunci di bagian bawah panel. */
+    .focus-mode.shell {
+      max-width:none;
+      width:100%;
+      height:100vh;
+      height:100dvh;
+      min-height:0;
+      display:flex;
+      flex-direction:column;
+      padding-top:clamp(12px,1.7vh,23px);
+      padding-bottom:clamp(12px,1.7vh,23px);
+    }
+    .focus-mode .topbar {
+      flex:none;
+      margin-bottom:clamp(10px,1.5vh,19px);
+    }
+    .focus-mode .layout {
+      display:grid;
+      flex:1 1 auto;
+      min-height:0;
+      grid-template-columns:minmax(0,1fr);
+      align-items:stretch;
+    }
+    .focus-mode .timer-card {
+      height:100%;
+      min-height:0;
+      max-height:none;
+    }
+    .focus-mode .timer-main {
+      flex:1 1 auto;
+      min-height:0;
+      justify-content:center;
+    }
+    .focus-mode .timer-head,
+    .focus-mode .timer-controls,
+    .focus-mode .timer-bottom { flex-shrink:0; }
+    /* Keterangan panjang tetap dapat dibaca tanpa mendorong metrik keluar layar. */
+    .focus-mode .stage-cue { overflow-y:auto; }
+    /* Layar HP yang terlalu pendek boleh digulir daripada elemen terpotong. */
+    @media(max-width:700px) and (max-height:690px) {
+      .focus-mode.shell {height:auto;min-height:100dvh;}
+      .focus-mode .layout {flex:1 0 auto;min-height:0;}
+      .focus-mode .timer-card {height:auto;}
+    }
+
+    /* REVISI VISIBILITAS: tombol lebih kecil, dua ringkasan lebih dominan. */
+    .timer-controls {gap:6px;padding:6px 10px 4px}
+    .timer-controls .button {min-height:35px;padding:6px 10px;font-size:12px;font-weight:700;border-radius:9px;line-height:1.2}
+    .timer-controls .play {min-width:118px}
+    .timer-bottom {align-items:center;margin:12px 16px 13px;padding:14px 4px 2px;gap:4px}
+    .metric {padding:2px 6px;min-width:0}
+    .metric strong {font-size:clamp(25px,2.3vw,34px);font-weight:850;line-height:1.2;letter-spacing:-.04em;white-space:nowrap}
+    .metric span {font-size:clamp(12px,1vw,14px);line-height:1.35;color:#c1d2e5;margin-top:5px;font-weight:600}
+    .focus-mode .timer-controls .button {min-height:36px;padding:6px 10px;font-size:12px}
+    .focus-mode .timer-controls .play {min-width:118px}
+    .focus-mode .timer-bottom {margin:11px 18px 15px;padding:16px 4px 3px}
+    .focus-mode .metric strong {font-size:clamp(29px,2.8vw,44px)}
+    .focus-mode .metric span {font-size:clamp(13px,1.1vw,16px);margin-top:6px}
+    @media (max-height:820px) and (min-width:701px) {
+      .timer-bottom {margin:9px 13px 9px;padding:10px 2px 1px}
+      .focus-mode .timer-bottom {margin:9px 15px 9px;padding:11px 2px 2px}
+      .focus-mode .metric strong {font-size:clamp(29px,2.5vw,38px)}
+      .focus-mode .metric span {font-size:clamp(12px,1.05vw,15px);margin-top:3px}
+      .focus-mode .timer-controls {padding-top:5px;padding-bottom:2px}
+    }
+    @media (max-width:700px) {
+      .timer-controls {gap:5px;padding:5px 7px 3px}
+      .timer-controls .button {min-height:33px;padding:6px 7px;font-size:11px}
+      .timer-controls .play {min-width:90px}
+      .timer-bottom {margin:9px 6px 9px;padding:10px 0 1px;gap:1px}
+      .metric {padding:0 3px}
+      .metric strong {font-size:clamp(18px,4.7vw,24px);letter-spacing:-.06em}
+      .metric span {font-size:clamp(9px,2.55vw,12px);line-height:1.3;margin-top:4px}
+      .focus-mode .timer-controls .button {min-height:33px;padding:6px 7px;font-size:11px}
+      .focus-mode .timer-controls .play {min-width:90px}
+      .focus-mode .timer-bottom {margin:9px 6px 10px;padding:10px 0 1px}
+      .focus-mode .metric strong {font-size:clamp(18px,4.9vw,25px)}
+      .focus-mode .metric span {font-size:clamp(9px,2.6vw,12px);margin-top:4px}
+    }
+  
+    /* Warna penanda waktu agar tiap jenis waktu mudah dibedakan */
+    .digits {color:#f7fbff;text-shadow:0 10px 38px rgba(113,220,219,.24)}
+    .digits.warning {color:#ffd89d;text-shadow:0 6px 28px rgba(255,189,100,.34)}
+    .digits.ended {color:#ffb0a6;text-shadow:0 7px 30px rgba(255,156,156,.28)}
+    #phaseElapsed {color:#f4d188;font-weight:800}
+    #phaseDuration {color:#78ddd8;font-weight:800}
+    .metric.metric-overall strong {color:#79e0d8;text-shadow:0 6px 22px rgba(113,220,219,.18)}
+    .metric.metric-overall span {color:#c4f4ef}
+    .metric.metric-elapsed strong {color:#f1ce86;text-shadow:0 6px 22px rgba(233,199,129,.16)}
+    .metric.metric-elapsed span {color:#f5dfb3}
+    .metric.metric-overall, .metric.metric-elapsed {position:relative}
+    .metric.metric-overall::before, .metric.metric-elapsed::before {content:"";position:absolute;top:-2px;left:18%;right:18%;height:3px;border-radius:999px;opacity:.95}
+    .metric.metric-overall::before {background:linear-gradient(90deg, transparent, #71dcdb, transparent)}
+    .metric.metric-elapsed::before {background:linear-gradient(90deg, transparent, #e9c781, transparent)}
+    @media(max-width:700px){
+      .metric.metric-overall::before, .metric.metric-elapsed::before {left:10%;right:10%;height:2px}
+    }
+
+
+    /* MODE PANTAU: hanya dua metrik yang paling relevan; menggunakan ruang
+       untuk memperbesar angka dan label, tanpa mengubah preset durasi. */
+    .timer-bottom {grid-template-columns:repeat(2,minmax(0,1fr));gap:0}
+    .timer-bottom .metric {padding:7px 10px 5px}
+    .timer-bottom .metric strong {font-size:clamp(36px,3.3vw,50px);line-height:1.05;letter-spacing:-.035em}
+    .timer-bottom .metric span {font-size:clamp(14px,1.2vw,18px);line-height:1.3;font-weight:700;margin-top:7px}
+    .focus-mode .timer-bottom {margin-top:10px;margin-bottom:10px;padding-top:12px}
+    .focus-mode .metric strong {font-size:clamp(42px,4vw,62px)}
+    .focus-mode .metric span {font-size:clamp(15px,1.4vw,20px);margin-top:7px}
+    @media (max-height:820px) and (min-width:701px) {
+      .timer-bottom .metric {padding:4px 10px 2px}
+      .focus-mode .timer-bottom {margin-top:7px;margin-bottom:7px;padding-top:9px}
+      .focus-mode .metric strong {font-size:clamp(38px,3.5vw,49px)}
+      .focus-mode .metric span {font-size:clamp(13px,1.1vw,17px);margin-top:4px}
+    }
+    @media (max-width:700px) {
+      .timer-bottom .metric {padding:4px 5px 3px}
+      .timer-bottom .metric strong {font-size:clamp(25px,6.8vw,39px);letter-spacing:-.04em}
+      .timer-bottom .metric span {font-size:clamp(11px,3vw,13px);margin-top:5px}
+      .focus-mode .metric strong {font-size:clamp(26px,7.5vw,39px)}
+      .focus-mode .metric span {font-size:clamp(11px,3vw,13px);margin-top:5px}
+    }
+
+    /* Mode pantau: isi ruang di bagian atas dengan identitas dan deskripsi
+       yang lebih besar; bagi area secara vertikal tanpa menggeser ringkasan. */
+    .stage-overview,.timer-readout {width:100%;display:flex;flex-direction:column;align-items:center;min-width:0}
+    .stage-overview {text-align:center}
+    .timer-readout {min-height:0}
+    .focus-mode .timer-main {
+      display:grid;
+      grid-template-rows:auto minmax(0,1fr) auto;
+      justify-items:center;
+      justify-content:stretch;
+      align-items:stretch;
+      padding:clamp(8px,1.4vh,18px) 20px 8px;
+      min-height:0;
+    }
+    .focus-mode .stage-overview {align-self:start;width:100%;max-width:1160px}
+    .focus-mode .stage-kicker {font-size:clamp(14px,1.15vw,19px);letter-spacing:.18em}
+    .focus-mode .stage-title {
+      font-size:clamp(44px,4.45vw,76px);
+      line-height:1.08;
+      margin:5px 0 3px;
+      max-width:min(100%,1120px);
+      max-height:min(17dvh,155px);
+      overflow-y:auto;
+    }
+    .focus-mode .stage-cue {
+      font-size:clamp(24px,2.4vw,37px);
+      line-height:1.28;
+      font-weight:650;
+      max-width:min(100%,1150px);
+      max-height:min(17dvh,145px);
+      min-height:0;
+      margin:5px 0 0;
+      overflow-y:auto;
+      scrollbar-width:thin;
+    }
+    .focus-mode .timer-readout {align-self:center;justify-content:center;width:100%}
+    .focus-mode .digits {margin:5px 0 8px}
+    .focus-mode .next-box {align-self:end;max-width:min(100%,750px);margin:0 auto 2px}
+    @media(max-height:820px) and (min-width:701px) {
+      .focus-mode .timer-main {padding-top:7px;padding-bottom:5px}
+      .focus-mode .stage-title {font-size:clamp(41px,4.2vw,61px)}
+      .focus-mode .stage-cue {font-size:clamp(23px,2.25vw,31px);max-height:min(15dvh,115px)}
+    }
+    @media(max-width:700px) {
+      .stage-overview,.timer-readout{width:100%}
+      .focus-mode .timer-main {display:flex;flex-direction:column;justify-content:space-around;padding:9px 10px 4px}
+      .focus-mode .stage-title {font-size:clamp(31px,7vw,44px);max-height:125px}
+      .focus-mode .stage-cue {font-size:clamp(19px,5vw,25px);max-height:min(16dvh,117px)}
+      .focus-mode .timer-readout {flex:1 1 auto}
+      .focus-mode .next-box {margin:6px auto 1px}
+    }
+    @media(max-width:700px) and (max-height:690px) {
+      .focus-mode .timer-readout {flex:0 0 auto}
+    }
+    /* Bila teks modul sangat panjang, batasi tinggi penjelasan pada monitor
+       agar tidak menimpa angka timer; isi lengkap tetap ada di editor. */
+    @media(min-width:701px) {
+      .focus-mode .stage-title {max-height:2.16em}
+      .focus-mode .stage-cue {max-height:2.56em}
+    }
+
+  
+    /* Revisi: informasi tahap berikutnya diperbesar, tombol berupa ikon ringkas. */
+    .next-box, .focus-mode .next-box {
+      display:flex;justify-content:center;align-items:center;flex-wrap:wrap;
+      gap:6px 15px;max-width:min(96%,990px);width:fit-content;
+      padding:11px 19px;margin-top:12px;
+      line-height:1.25;text-align:center;border-radius:14px;
+      border:1px solid #3c5d7b;background:#203953;
+    }
+    .next-label {color:#85e1df;font-size:clamp(22px,2vw,28px);font-weight:850;line-height:1;letter-spacing:0}
+    .next-name {color:#fff;font-size:clamp(19px,1.9vw,27px);font-weight:850;letter-spacing:-.025em;overflow-wrap:anywhere}
+    .next-duration {color:#f2d18c;font-size:clamp(14px,1.2vw,18px);font-weight:800;white-space:nowrap}
+    .timer-controls, .focus-mode .timer-controls {gap:11px;padding:7px 12px 4px}
+    .timer-controls .button.icon-button, .focus-mode .timer-controls .button.icon-button {
+      width:46px;height:43px;min-width:46px;min-height:43px;max-width:46px;
+      padding:0;display:inline-flex;justify-content:center;align-items:center;
+      border-radius:11px;flex:0 0 46px;
+    }
+    .timer-controls .button.icon-button.play, .focus-mode .timer-controls .button.icon-button.play {min-width:46px}
+    .icon-button svg {display:block;width:24px;height:24px;pointer-events:none}
+    .icon-button.primary svg {width:25px;height:25px}
+    .icon-button:disabled {opacity:.32}
+    @media (max-height:820px) and (min-width:701px) {
+      .next-box, .focus-mode .next-box {margin-top:6px;padding:9px 16px;gap:5px 11px}
+      .next-label {font-size:23px}
+      .next-name {font-size:clamp(19px,1.7vw,24px)}
+      .next-duration {font-size:15px}
+      .timer-controls, .focus-mode .timer-controls {gap:10px;padding:5px 10px 2px}
+      .timer-controls .button.icon-button, .focus-mode .timer-controls .button.icon-button {height:41px;min-height:41px}
+    }
+    @media (max-width:700px) {
+      .next-box, .focus-mode .next-box {max-width:100%;width:auto;padding:9px 12px;gap:4px 9px;margin-top:6px}
+      .next-label {font-size:21px}
+      .next-name {font-size:18px}
+      .next-duration {font-size:13px}
+      .timer-controls, .focus-mode .timer-controls {gap:8px;padding:8px 7px 3px}
+      .timer-controls .button.icon-button, .focus-mode .timer-controls .button.icon-button {
+        width:43px;height:42px;min-width:43px;min-height:42px;max-width:43px;flex-basis:43px;
+      }
+      .icon-button svg {width:22px;height:22px}
+    }
+
+    /* REVISI — navigasi aktif hanya di header saat Mode Fokus.
+       Mode Pengaturan mempertahankan tombol di dalam panel timer. */
+    .header-nav-slot {display:none;min-width:0}
+    .focus-mode .topbar {
+      display:grid;
+      grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+      align-items:center;
+      gap:12px;
+    }
+    .focus-mode .identity {min-width:0}
+    .focus-mode .header-nav-slot {
+      display:flex;justify-content:center;align-items:center;justify-self:center;
+      border:1px solid #294b67;border-radius:13px;
+      background:rgba(16,35,58,.85);
+      padding:5px 8px;
+    }
+    .focus-mode .topactions {justify-self:end;justify-content:flex-end}
+    .focus-mode .header-nav-slot .timer-controls {
+      display:flex;align-items:center;justify-content:center;
+      gap:7px;padding:0;margin:0;
+    }
+    .focus-mode .header-nav-slot .timer-controls .button.icon-button {
+      width:38px;max-width:38px;min-width:38px;flex-basis:38px;
+      height:37px;min-height:37px;
+      border-radius:9px;padding:0;
+    }
+    .focus-mode .header-nav-slot .icon-button svg {width:21px;height:21px}
+    /* Karena kontrol pindah ke header, isi panel memanfaatkan ruangnya. */
+    .focus-mode .timer-card > .timer-controls {display:none}
+    @media(max-width:1070px) {
+      .focus-mode .topbar {grid-template-columns:minmax(0,1fr) auto;gap:7px 12px}
+      .focus-mode .identity {grid-column:1;grid-row:1}
+      .focus-mode .topactions {grid-column:2;grid-row:1}
+      .focus-mode .header-nav-slot {grid-column:1/-1;grid-row:2;justify-self:center}
+    }
+    @media(max-width:700px) {
+      .focus-mode .topbar {grid-template-columns:1fr;gap:8px;justify-items:center}
+      .focus-mode .identity {grid-column:1;grid-row:1;justify-self:center}
+      .focus-mode .header-nav-slot {grid-column:1;grid-row:2;justify-self:center}
+      .focus-mode .topactions {grid-column:1;grid-row:3;justify-self:center;justify-content:center;gap:6px}
+      .focus-mode .topactions .button {padding:7px 10px;font-size:11px}
+      .focus-mode .header-nav-slot .timer-controls .button.icon-button {width:40px;max-width:40px;min-width:40px;flex-basis:40px;height:38px;min-height:38px}
+    }
+    @media(max-height:710px) and (min-width:701px) {
+      .focus-mode .header-nav-slot {padding:3px 7px}
+      .focus-mode .header-nav-slot .timer-controls .button.icon-button {height:34px;min-height:34px}
+    }
+
+  
+    /* Pilih preset internal saat aplikasi dipublikasikan melalui GitHub Pages. */
+    .preset-picker{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:9px;padding:0 17px 13px}
+    .preset-picker label{font-size:11px;font-weight:800;color:var(--muted);white-space:nowrap}
+    .preset-picker select{min-width:0;width:100%;padding:9px 10px;border:1px solid #3b5670;background:#0b1c2e;color:#f7fbff;border-radius:9px;font-size:12px;font-weight:650}
+    .preset-picker select:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+    .preset-picker button{white-space:nowrap}
+    @media(max-width:450px){.preset-picker{grid-template-columns:minmax(0,1fr) auto}.preset-picker label{grid-column:1/-1}}
+
+  </style>
+</head>
+<body>
+  <div class="shell" id="app">
+    <header class="topbar">
+      <div class="identity"><div class="mark" aria-hidden="true">◷</div><div><div class="eyebrow">UKPPG Calon Guru</div><h1>UKin Timer</h1></div></div>
+      <div id="headerNavSlot" class="header-nav-slot" aria-label="Navigasi timer di mode fokus"></div>
+      <div class="topactions">
+        <button id="focusButton" class="button small" title="Sembunyikan daftar tahapan">◉ Mode Fokus</button>
+        <button id="fullscreenButton" class="button small ghost" title="Tampilkan layar penuh">⛶ Layar Penuh</button>
+      </div>
+    </header>
+    <section class="presets" aria-label="Pilihan total durasi">
+      <div class="preset-left"><span class="section-label">Total Jam Pelajaran</span><div class="preset-buttons" id="presetButtons">
+        <button class="preset" data-preset="60">60 menit</button><button class="preset" data-preset="70">70 menit</button><button class="preset" data-preset="80">80 menit</button><button class="preset" data-preset="90">90 menit</button>
+      </div></div>
+      <div class="preset-right"><span id="totalChip" class="totals-chip">Sesuai target</span><button id="balanceButton" class="button small" title="Sesuaikan durasi lain agar jumlah sama dengan target">Samakan ke target</button><button id="restoreButton" class="button small ghost" title="Pulihkan durasi bawaan tanpa menghapus nama/keterangan dan jumlah kegiatan">Pulihkan durasi</button></div>
+    </section>
+    <main class="layout">
+      <section class="card timer-card" aria-label="Timer utama">
+        <div class="timer-head"><div id="status" class="status"><span class="dot"></span><span id="statusLabel">Siap dimulai</span></div><span id="stepCount" class="step-count">Tahap 1 dari 5</span></div>
+        <div class="timer-main">
+          <div class="stage-overview">
+            <div id="stageKicker" class="stage-kicker">PEMBUKAAN</div>
+            <div id="stageTitle" class="stage-title">Pembukaan</div>
+            <div id="stageCue" class="stage-cue">Sesuaikan dengan kegiatan pada modul ajar</div>
+          </div>
+          <div class="timer-readout">
+            <div id="digits" class="digits" role="timer" aria-label="Sisa waktu tahapan">10:00</div>
+            <div class="phase-progress" role="progressbar" aria-label="Kemajuan tahapan" aria-valuemin="0" aria-valuemax="100" id="phaseProgressTrack"><div id="phaseProgress"></div></div>
+            <div class="phase-progress-meta"><span id="phaseElapsed">Terpakai 00:00</span><span id="phaseDuration">Alokasi 10 menit</span></div>
+          </div>
+          <div class="next-box" id="nextBox"><span class="next-label" aria-label="Tahap berikutnya" title="Tahap berikutnya">→</span><strong class="next-name">Kegiatan Inti 1</strong><span class="next-duration">18 menit</span></div>
+        </div>
+        <div class="timer-controls" role="group" aria-label="Kontrol timer">
+          <button type="button" id="prevButton" class="button icon-button" aria-label="Tahap sebelumnya" title="Tahap sebelumnya (←)"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 5 9 12l9 7V5Z"/><path d="M5 5v14"/></svg></button>
+          <button type="button" id="playButton" class="button primary play icon-button" aria-label="Mulai timer" title="Mulai timer (Spasi)"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 4 13 8-13 8V4Z" fill="currentColor" stroke="none"/></svg></button>
+          <button type="button" id="nextButton" class="button icon-button" aria-label="Tahap berikutnya" title="Tahap berikutnya (→)"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 5 9 7-9 7V5Z"/><path d="M19 5v14"/></svg></button>
+          <button type="button" id="resetButton" class="button danger icon-button" aria-label="Ulang tahap aktif" title="Ulang tahap aktif (R)"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11a9 9 0 1 1 2 6"/><path d="M3 4v7h7"/></svg></button>
+        </div>
+        <div class="timer-bottom">
+          <div class="metric metric-overall"><strong id="overallRemaining">80:00</strong><span id="overallRemainingLabel">SISA WAKTU</span></div>
+          <div class="metric metric-elapsed"><strong id="totalElapsed">00:00</strong><span id="totalElapsedLabel">WAKTU BERLALU</span></div>
+        </div>
+      </section>
+      <aside class="side-panel" aria-label="Pengaturan tahapan">
+        <section class="card">
+          <div class="side-head"><h2>Editor Tahapan</h2><button id="resetAllButton" class="button small danger" title="Ulang seluruh sesi dari awal">Reset Sesi</button></div>
+          <div class="module-fields">
+            <div class="module-edit"><label for="moduleTitleInput">Preset</label><input id="moduleTitleInput" maxlength="120" value="Modul Ajar Diva" placeholder="Nama modul"></div>
+            <div class="module-edit"><label for="modelNameInput">Model</label><input id="modelNameInput" maxlength="100" value="" placeholder="Opsional"></div>
+          </div>
+          <div class="preset-picker">
+            <label for="bundledPreset">Preset Cepat</label>
+            <select id="bundledPreset" aria-label="Pilih preset modul">
+              <option value="presets/diva-execute-detail-29.json">Diva · EXECUTE Detail (29 tahap)</option>
+              <option value="presets/diva-execute-ringkas-7.json">Diva · EXECUTE Ringkas (7 tahap)</option>
+              <option value="presets/bayu-80-menit.json">Bayu · 80 menit (7 tahap)</option>
+            </select>
+            <button type="button" id="loadBundledPreset" class="button small" title="Muat preset pilihan">Muat</button>
+          </div>
+          <div id="stages" class="stages"></div>
+          <div class="editor-toolbar"><button id="addStageButton" class="button small primary">＋ Tambah Tahap</button><button id="resetTemplateButton" class="button small ghost">↶ Template Netral</button></div>
+          <div class="tools-bottom"><button id="exportButton" class="button small">↓ Simpan Konfigurasi (.json)</button><button id="importButton" class="button small">↑ Impor Konfigurasi</button><input id="importFile" type="file" accept=".json,application/json" hidden></div>
+        </section>
+        <section class="card config"><h3>Pengaturan Pengambilan Video</h3>
+          <label class="setting"><span><span class="setting-name">Lanjut otomatis ke tahap berikutnya</span><span class="setting-help" style="display:block">Timer berganti saat hitungan mencapai nol</span></span><span class="toggle"><input id="autoToggle" type="checkbox" checked><span class="track"></span></span></label>
+          <label class="setting"><span><span class="setting-name">Bunyi pengingat</span><span class="setting-help" style="display:block">Bip saat sisa 1 menit dan pergantian tahap</span></span><span class="toggle"><input id="soundToggle" type="checkbox"><span class="track"></span></span></label>
+          <label class="setting"><span><span class="setting-name">Cegah layar tidur</span><span class="setting-help" style="display:block">Jika browser/perangkat mendukung</span></span><span class="toggle"><input id="wakeToggle" type="checkbox"><span class="track"></span></span></label>
+        </section>
+      </aside>
+    </main>
+  </div>
+  <div class="notice" id="notice" role="status" aria-live="polite"></div>
+  <script>
+    (() => {
+      'use strict';
+      const STORE = 'ukin-focus-timer-v3';
+      const OLD_STORE = 'ukin-focus-timer-v2';
+      // Template netral: bukan sintaks model tertentu. Bebas mengubah semua tahap.
+      const base = [
+        { id:'opening', name:'Pembukaan', short:'PEMBUKAAN', cue:'Tuliskan kegiatan pendahuluan sesuai modul ajar.' },
+        { id:'core1', name:'Kegiatan Inti 1', short:'KEGIATAN INTI · 1', cue:'Ubah nama tahap dan uraian kegiatan sesuai sintaks model pembelajaran.' },
+        { id:'core2', name:'Kegiatan Inti 2', short:'KEGIATAN INTI · 2', cue:'Tuliskan aktivitas guru dan murid pada tahap ini.' },
+        { id:'core3', name:'Kegiatan Inti 3', short:'KEGIATAN INTI · 3', cue:'Tambah atau hapus tahap bila jumlah sintaks berbeda.' },
+        { id:'closing', name:'Penutup', short:'PENUTUP', cue:'Tuliskan simpulan, refleksi, tindak lanjut, dan kegiatan penutup.' }
+      ];
+      // Durasi awal (menit): pembukaan, inti 1, inti 2, inti 3, penutup.
+      const templates = {
+        60: [8,12,20,15,5],
+        70: [10,15,22,17,6],
+        80: [10,18,25,20,7],
+        90: [10,20,30,22,8]
+      };
+      const $ = (id) => document.getElementById(id);
+      const els = { app:$('app'),stages:$('stages'),moduleTitleInput:$('moduleTitleInput'),modelNameInput:$('modelNameInput'),status:$('status'),statusLabel:$('statusLabel'),stepCount:$('stepCount'),stageKicker:$('stageKicker'),stageTitle:$('stageTitle'),stageCue:$('stageCue'),digits:$('digits'),phaseProgress:$('phaseProgress'),phaseProgressTrack:$('phaseProgressTrack'),phaseElapsed:$('phaseElapsed'),phaseDuration:$('phaseDuration'),nextBox:$('nextBox'),overallRemaining:$('overallRemaining'),totalElapsed:$('totalElapsed'),playButton:$('playButton'),prevButton:$('prevButton'),nextButton:$('nextButton'),totalChip:$('totalChip'),balanceButton:$('balanceButton'),focusButton:$('focusButton'),fullscreenButton:$('fullscreenButton'),autoToggle:$('autoToggle'),soundToggle:$('soundToggle'),wakeToggle:$('wakeToggle'),notice:$('notice') };
+      const makeStages = (target) => base.map((s,i) => ({...s, minutes:templates[target][i]}));
+      let state = { target:80, moduleTitle:'Modul Ajar Diva', modelName:'', stages:makeStages(80), index:0, elapsed:{}, running:false, anchor:0, auto:true, sound:false, wake:false, focus:false, lastEdited:null, warned:{}, finished:false };
+      let wakeLock=null, audioContext=null, noticeTimeout=0, lastSaved=0;
+      const roundHalf = n => Math.round(n*2)/2;
+      const clamp = (v,lo,hi) => Math.min(hi,Math.max(lo,v));
+      const durMs = s => Math.round(s.minutes*60000);
+      const totalMs = () => state.stages.reduce((sum,s)=>sum+durMs(s),0);
+      const phaseMs = (idx=state.index) => {
+        const s=state.stages[idx];
+        if(!s) return 0;
+        return Math.max(0,(state.elapsed[s.id]||0) + ((state.running && idx===state.index)?Date.now()-state.anchor:0));
+      };
+      const escapeHtml = value => String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+      function mmss(ms){
+        // Semua penghitung waktu memakai total menit, bahkan jika melewati 60 menit.
+        // Contoh: 80 menit -> 80:00, bukan 01:20:00.
+        const sec=Math.max(0,Math.ceil(ms/1000));
+        const minutes=Math.floor(sec/60);
+        const seconds=sec%60;
+        return `${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
+      }
+      function minuteLabel(n){ return Number.isInteger(n)?String(n):n.toFixed(1).replace('.',','); }
+      function notice(msg){els.notice.textContent=msg;els.notice.classList.add('show');clearTimeout(noticeTimeout);noticeTimeout=setTimeout(()=>els.notice.classList.remove('show'),3800);}
+      function beep(count=1){
+        if(!state.sound) return;
+        try{
+          audioContext ||= new (window.AudioContext||window.webkitAudioContext)();
+          if(audioContext.state==='suspended') audioContext.resume();
+          for(let i=0;i<count;i++){
+            const osc=audioContext.createOscillator(), gain=audioContext.createGain(),t=audioContext.currentTime+i*.24;
+            osc.type='sine';osc.frequency.setValueAtTime(i===count-1?850:690,t);
+            gain.gain.setValueAtTime(.0001,t);gain.gain.exponentialRampToValueAtTime(.10,t+.014);gain.gain.exponentialRampToValueAtTime(.0001,t+.15);
+            osc.connect(gain).connect(audioContext.destination);osc.start(t);osc.stop(t+.18);
+          }
+        }catch(_){/* Browser tanpa Web Audio */}
+      }
+      async function requestWake(){
+        if(!state.wake||!state.running||!('wakeLock' in navigator)||document.visibilityState!=='visible') return;
+        try{wakeLock=await navigator.wakeLock.request('screen');}catch(_){/* Opsional */}
+      }
+      async function releaseWake(){if(wakeLock){try{await wakeLock.release();}catch(_){}wakeLock=null;}}
+      function pause(){if(!state.running)return;const s=state.stages[state.index];state.elapsed[s.id]=clamp(phaseMs(),0,durMs(s));state.running=false;state.anchor=0;releaseWake();save();paint();}
+      function play(){
+        if(state.running){pause();return;}
+        const s=state.stages[state.index];
+        if(phaseMs()>=durMs(s)){
+          if(state.index===state.stages.length-1){notice('Sesi selesai. Gunakan Ulang Tahap atau Reset Sesi.');return;}
+          state.index++;state.finished=false;
+        }
+        state.anchor=Date.now();state.running=true;state.finished=false;
+        if(state.sound) beep(1);
+        requestWake();save();renderStages();paint();
+      }
+      function selectStage(index, announce=true){
+        if(index<0||index>=state.stages.length)return;
+        const wasRunning=state.running;
+        if(wasRunning) {const old=state.stages[state.index];state.elapsed[old.id]=clamp(phaseMs(),0,durMs(old));}
+        state.index=index;state.anchor=Date.now();state.finished=false;
+        state.warned={};
+        save();renderStages();paint();
+        if(announce)notice(`Tahap aktif: ${state.stages[index].name}`);
+      }
+      function resetPhase(){
+        const s=state.stages[state.index];state.elapsed[s.id]=0;state.anchor=Date.now();state.warned={};state.finished=false;save();paint();notice('Waktu tahap ini diulang dari awal.');
+      }
+      function resetAll(){
+        if(!confirm('Ulang seluruh sesi dari tahap pertama? Alokasi durasi tetap disimpan.'))return;
+        state.index=0;state.elapsed={};state.anchor=0;state.running=false;state.finished=false;state.warned={};releaseWake();save();renderStages();paint();notice('Sesi siap dimulai ulang.');
+      }
+      function scaleDurations(target){
+        // Distribusi per 30 detik menggunakan largest-remainder, total dijamin tepat.
+        const stages=state.stages;
+        const units=target*2, n=stages.length;
+        if(n>units) {notice('Jumlah tahapan terlalu banyak untuk total JP ini.');return false;}
+        const current=stages.map(s=>Math.max(1,Math.round(s.minutes*2)));
+        const available=units-n;
+        const weights=current.map(v=>Math.max(0,v-1));
+        const sum=weights.reduce((a,b)=>a+b,0);
+        const raw=weights.map(w=>sum?available*w/sum:available/n);
+        const allocated=raw.map(Math.floor);
+        let remain=available-allocated.reduce((a,b)=>a+b,0);
+        const order=raw.map((v,i)=>({i,part:v-Math.floor(v)})).sort((a,b)=>b.part-a.part);
+        for(let k=0;k<remain;k++)allocated[order[k%order.length].i]++;
+        stages.forEach((s,i)=>s.minutes=(allocated[i]+1)/2);
+        return true;
+      }
+      function applyPreset(target){
+        const hasProgress=state.running||state.index!==0||Object.values(state.elapsed).some(v=>v>0);
+        if(hasProgress && !confirm('Mengubah total JP akan memulai kembali timer, tetapi isi modul tetap tersimpan. Lanjutkan?'))return;
+        if(state.stages.length>target*2){notice('Jumlah tahap terlalu banyak untuk target ini.');return;}
+        state.target=target;
+        if(!scaleDurations(target))return;
+        state.index=0;state.elapsed={};state.running=false;state.anchor=0;state.finished=false;state.lastEdited=null;state.warned={};releaseWake();save();renderStages();paint();notice(`Target ${target} menit aktif. Nama tahap dan kegiatan tidak berubah.`);
+      }
+      function changeDuration(id,input){
+        const s=state.stages.find(s=>s.id===id);if(!s)return;
+        const raw=Number(String(input).replace(',','.'));
+        if(!Number.isFinite(raw)||raw<.5||raw>180){notice('Durasi harus antara 0,5 dan 180 menit.');renderStages();return;}
+        const current=state.stages[state.index];
+        if(state.running) {state.elapsed[current.id]=clamp(phaseMs(),0,durMs(current));state.anchor=Date.now();}
+        s.minutes=clamp(roundHalf(raw),.5,180);
+        state.elapsed[id]=Math.min(state.elapsed[id]||0,durMs(s));state.lastEdited=id;state.finished=false;state.warned={};save();renderStages();paint();
+      }
+      function changeField(id,key,val){
+        const s=state.stages.find(s=>s.id===id);if(!s)return;
+        const limits={name:100,short:75,cue:700};
+        const fallback=key==='name'?'Tahap Pembelajaran':key==='short'?'TAHAP PEMBELAJARAN':'—';
+        s[key]=String(val||'').trim().slice(0,limits[key])||fallback;
+        save();renderStages();paint();
+      }
+      function confirmStructuralChange(){
+        if(state.running){notice('Jeda timer dahulu sebelum mengubah susunan tahapan.');return false;}
+        const hasProgress=state.index!==0||Object.values(state.elapsed).some(v=>v>0);
+        if(hasProgress && !confirm('Mengubah urutan/jumlah tahap akan mengulang timer. Isi modul tetap tersimpan. Lanjutkan?'))return false;
+        state.index=0;state.elapsed={};state.running=false;state.anchor=0;state.finished=false;state.warned={};return true;
+      }
+      let uniqueCounter=0;
+      function addStage(){
+        if(state.stages.length>=35){notice('Maksimal 35 tahap per modul.');return;}
+        if(!confirmStructuralChange())return;
+        const id='custom_'+Date.now()+'_'+(++uniqueCounter);
+        const newStage={id,name:'Tahap / Kegiatan Baru',short:`KEGIATAN ${state.stages.length+1}`,cue:'Tuliskan aktivitas guru dan murid sesuai modul ajar.',minutes:3};
+        // Sisipkan sebelum Penutup bila tahap penutup ada di posisi terakhir.
+        const insertAt=state.stages.at(-1)?.id==='closing'?state.stages.length-1:state.stages.length;
+        state.stages.splice(insertAt,0,newStage);
+        state.lastEdited=id;save();renderStages();paint();notice('Tahap baru ditambahkan. Edit nama, label, dan keterangan.');
+        const box=els.stages.querySelector(`[data-index="${insertAt}"] details`);if(box)box.open=true;
+      }
+      function removeStage(id){
+        if(state.stages.length<=1){notice('Minimal harus ada satu tahap.');return;}
+        if(!confirm(`Hapus tahap "${state.stages.find(s=>s.id===id)?.name||''}" dari modul?`))return;
+        if(!confirmStructuralChange())return;
+        state.stages=state.stages.filter(s=>s.id!==id);
+        if(state.lastEdited===id)state.lastEdited=null;
+        save();renderStages();paint();notice('Tahap dihapus. Periksa kembali total durasi.');
+      }
+      function moveStage(id,offset){
+        const index=state.stages.findIndex(s=>s.id===id),target=index+offset;
+        if(index<0||target<0||target>=state.stages.length)return;
+        if(!confirmStructuralChange())return;
+        const [stage]=state.stages.splice(index,1);state.stages.splice(target,0,stage);
+        save();renderStages();paint();notice('Urutan tahap diperbarui.');
+      }
+      function balance(){
+        if(state.running){notice('Jeda timer terlebih dahulu sebelum menyamakan alokasi.');return;}
+        let need=Math.round((state.target-totalMs()/60000)*2);
+        if(need===0){notice('Total durasi sudah sesuai target.');return;}
+        // Utamakan tahap dengan alokasi terpanjang tanpa mengasumsikan model tertentu.
+        const ranked=state.stages.filter(s=>s.id!==state.lastEdited).sort((a,b)=>b.minutes-a.minutes);
+        const fallback=state.stages.find(s=>s.id===state.lastEdited);
+        if(fallback)ranked.push(fallback);
+        for(const s of ranked){
+          const capacity=need>0?Math.floor((180-s.minutes)*2):Math.floor((s.minutes-.5)*2);
+          const n=Math.min(Math.abs(need),Math.max(0,capacity));
+          s.minutes+=Math.sign(need)*n/2;need-=Math.sign(need)*n;
+          if(need===0)break;
+        }
+        if(need!==0){notice('Tidak dapat menyamakan total karena batas durasi per tahap (0,5–180 menit).');}
+        for(const s of state.stages)state.elapsed[s.id]=Math.min(state.elapsed[s.id]||0,durMs(s));
+        state.warned={};save();renderStages();paint();
+        if(need===0)notice('Alokasi sudah tepat '+state.target+' menit.');
+      }
+      function resetAllocation(){
+        if(state.running){notice('Jeda timer dahulu untuk memulihkan durasi.');return;}
+        if(!confirm('Sesuaikan kembali DURASI agar tepat '+state.target+' menit? Nama dan keterangan tahap tidak akan dihapus.'))return;
+        if(!scaleDurations(state.target))return;
+        for(const s of state.stages)state.elapsed[s.id]=Math.min(state.elapsed[s.id]||0,durMs(s));
+        state.lastEdited=null;state.finished=false;save();renderStages();paint();notice('Durasi disesuaikan; seluruh isi modul tetap dipertahankan.');
+      }
+      function resetTemplate(){
+        if(state.running){notice('Jeda timer terlebih dahulu.');return;}
+        if(!confirm('Kembalikan seluruh nama tahap, keterangan, dan durasi ke template netral? Perubahan modul akan terhapus. Ekspor dahulu jika diperlukan.'))return;
+        state.stages=makeStages(state.target);state.index=0;state.elapsed={};state.anchor=0;state.finished=false;state.lastEdited=null;state.warned={};state.moduleTitle='Modul Ajar Diva';state.modelName='';save();renderStages();paint();notice('Template netral dipulihkan.');
+      }
+      function exportConfig(){
+        const payload={app:'UKin Focus Timer Universal',version:3,exportedAt:new Date().toISOString(),moduleTitle:state.moduleTitle,modelName:state.modelName,target:state.target,stages:state.stages.map(({id,name,short,cue,minutes})=>({id,name,short,cue,minutes})),options:{auto:state.auto,sound:state.sound,wake:state.wake}};
+        const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+        const url=URL.createObjectURL(blob);
+        const a=document.createElement('a');a.href=url;a.download='UKin_Modul_'+(state.moduleTitle||'Ajar').replace(/[^a-z0-9_-]+/gi,'_').slice(0,40)+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),400);
+        notice('Konfigurasi modul diunduh. File JSON dapat diimpor di perangkat lain.');
+      }
+      async function importConfig(file){
+        if(!file)return;
+        try{
+          if(file.size>200000)throw new Error('File terlalu besar.');
+          const obj=JSON.parse(await file.text());
+          if(!obj||!templates[obj.target]||!Array.isArray(obj.stages)||obj.stages.length<1||obj.stages.length>35)throw new Error('Format konfigurasi tidak dikenali.');
+          const ids=new Set();
+          const valid=obj.stages.every(s=>{
+            if(!s||typeof s.id!=='string'||s.id.length>100||ids.has(s.id)||typeof s.name!=='string'||!s.name.trim()||typeof s.short!=='string'||typeof s.cue!=='string'||!Number.isFinite(s.minutes)||s.minutes<.5||s.minutes>180)return false;
+            ids.add(s.id);return true;
+          });
+          if(!valid)throw new Error('Ada data tahap yang tidak valid.');
+          if(!confirm('Impor modul ini? Modul saat ini akan digantikan. Simpan konfigurasi dahulu jika ingin mencadangkannya.'))return;
+          state.stages=obj.stages.map(s=>({id:s.id,name:s.name.slice(0,100),short:s.short.slice(0,75),cue:s.cue.slice(0,700),minutes:clamp(roundHalf(s.minutes),.5,180)}));
+          state.target=obj.target;state.moduleTitle=String(obj.moduleTitle||'Modul Ajar Diva').slice(0,120);state.modelName=String(obj.modelName||'').slice(0,100);state.index=0;state.elapsed={};state.anchor=0;state.running=false;state.finished=false;state.lastEdited=null;state.warned={};
+          if(obj.options){state.auto=obj.options.auto!==false;state.sound=!!obj.options.sound;state.wake=!!obj.options.wake;}
+          releaseWake();save();renderStages();paint();notice('Konfigurasi modul berhasil diimpor.');
+        }catch(err){notice('Gagal mengimpor: '+err.message);}
+      }
+      function onTransition(oldStage,nextStage){
+        if(state.sound)beep(3);
+        if(nextStage)notice(`Waktu ${oldStage.name} selesai. Lanjut: ${nextStage.name}`);
+        else notice('Seluruh kegiatan selesai. Selamat menyelesaikan take UKin!');
+      }
+      function tick(){
+        if(!state.running)return;
+        let guard=0;
+        while(state.running && guard++<12){
+          const current=state.stages[state.index],ms=phaseMs();
+          if(ms<durMs(current)){
+            const left=durMs(current)-ms;
+            if(left<=60000 && !state.warned[current.id]) {state.warned[current.id]=true;if(state.sound)beep(2);}
+            break;
+          }
+          const extra=Math.max(0,ms-durMs(current));
+          state.elapsed[current.id]=durMs(current);
+          if(state.auto && state.index<state.stages.length-1){
+            state.index++;state.elapsed[state.stages[state.index].id]=Math.max(0,(state.elapsed[state.stages[state.index].id]||0)+extra);
+            state.anchor=Date.now();state.warned={};
+            onTransition(current,state.stages[state.index]);renderStages();save();
+          }else{
+            state.running=false;state.anchor=0;state.finished=state.index===state.stages.length-1;
+            if(state.finished) onTransition(current,null);
+            else {if(state.sound)beep(3);notice(`Waktu ${current.name} selesai. Tekan Berikutnya untuk melanjutkan.`);}
+            releaseWake();save();renderStages();break;
+          }
+        }
+        paint();
+        if(Date.now()-lastSaved>4000)save();
+      }
+      function renderStages(){
+        els.moduleTitleInput.value=state.moduleTitle;
+        els.modelNameInput.value=state.modelName;
+        const expanded=new Set([...els.stages.querySelectorAll('details[data-detail][open]')].map(el=>el.dataset.detail));
+        els.stages.innerHTML=state.stages.map((s,i)=>{
+          const done=i<state.index || (i===state.index && phaseMs()>=durMs(s));
+          const id=escapeHtml(s.id);
+          return `<div class="stage-row ${i===state.index?'active':''} ${done?'completed':''}" data-index="${i}">
+            <button type="button" class="jump" data-jump="${i}" aria-label="Beralih ke ${escapeHtml(s.name)}" title="Pindah ke tahap ini">${done&&i!==state.index?'✓':i+1}</button>
+            <div class="stage-fields"><input class="phase-name" data-name="${id}" value="${escapeHtml(s.name)}" aria-label="Nama tahap ${i+1}" maxlength="100"><div class="phase-sub">${escapeHtml(s.short)} · ${escapeHtml(s.cue)}</div></div>
+            <div class="duration"><input class="minute-input" data-duration="${id}" type="number" min="0.5" max="180" step="0.5" value="${s.minutes}" aria-label="Durasi ${escapeHtml(s.name)} dalam menit"><span class="unit">m</span></div>
+            <details class="stage-details" data-detail="${id}" ${expanded.has(s.id)?'open':''}>
+              <summary>Rincian & Urutan</summary>
+              <div class="editor-fields">
+                <label>Label Singkat<input data-short="${id}" value="${escapeHtml(s.short)}" maxlength="75" placeholder="Misalnya: LANGKAH 2 · EKSPLORASI"></label>
+                <label>Keterangan Kegiatan<textarea data-cue="${id}" maxlength="700" rows="3" placeholder="Langkah kegiatan sesuai modul ajar">${escapeHtml(s.cue)}</textarea></label>
+                <div class="stage-actions"><button class="button small" data-moveup="${id}" ${i===0?'disabled':''}>↑ Naik</button><button class="button small" data-movedown="${id}" ${i===state.stages.length-1?'disabled':''}>↓ Turun</button><button class="button small danger" data-delete="${id}" ${state.stages.length===1?'disabled':''}>Hapus tahap</button></div>
+              </div>
+            </details>
+          </div>`;
+        }).join('');
+        document.querySelectorAll('[data-preset]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.preset)===state.target)));
+      }
+      const controlIcons = {
+        back: `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 5 9 12l9 7V5Z"/><path d="M5 5v14"/></svg>`,
+        next: `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 5 9 7-9 7V5Z"/><path d="M19 5v14"/></svg>`,
+        play: `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 4 13 8-13 8V4Z" fill="currentColor" stroke="none"/></svg>`,
+        pause: `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5.5" y="4" width="4.5" height="16" rx="1" fill="currentColor" stroke="none"/><rect x="14" y="4" width="4.5" height="16" rx="1" fill="currentColor" stroke="none"/></svg>`,
+        restart: `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11a9 9 0 1 1 2 6"/><path d="M3 4v7h7"/></svg>`,
+        check: `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 12 5 5L20 6"/></svg>`,
+      };
+      function updatePlayIcon(){
+        const name = state.running?'pause':state.finished?'check':'play';
+        if(els.playButton.dataset.icon!==name){
+          els.playButton.innerHTML=controlIcons[name];
+          els.playButton.dataset.icon=name;
+        }
+        const label=state.running?'Jeda timer':state.finished?'Sesi selesai':phaseMs()>0?'Lanjutkan timer':'Mulai timer';
+        els.playButton.setAttribute('aria-label',label);
+        els.playButton.title=label+' (Spasi)';
+      }
+      function paint(){
+        const s=state.stages[state.index],spent=Math.min(durMs(s),phaseMs()),left=Math.max(0,durMs(s)-spent);
+        const overallPast=state.stages.slice(0,state.index).reduce((a,s)=>a+durMs(s),0)+spent;
+        const overallLeft=Math.max(0,totalMs()-overallPast);
+        const pct=durMs(s)>0?clamp(spent/durMs(s)*100,0,100):0;
+        els.status.className='status '+(state.running?'running':state.finished?'ended':'ready');
+        els.statusLabel.textContent=state.running?'Timer berjalan':state.finished?'Sesi selesai':spent>0?'Dijeda':'Siap dimulai';
+        els.stepCount.textContent=`Tahap ${state.index+1} dari ${state.stages.length}`;
+                        els.stageKicker.textContent=s.short;
+        els.stageTitle.textContent=s.name;
+        els.stageCue.textContent=s.cue;
+        els.digits.textContent=mmss(left);
+        els.digits.className='digits '+(left<=0?'ended':left<=60000?'warning':'');
+        els.phaseProgress.style.width=pct.toFixed(3)+'%';
+        els.phaseProgressTrack.setAttribute('aria-valuenow',String(Math.round(pct)));
+        els.phaseElapsed.textContent='Terpakai '+mmss(spent);
+        els.phaseDuration.textContent='Alokasi '+minuteLabel(s.minutes)+' menit';
+        const next=state.stages[state.index+1];
+        els.nextBox.innerHTML=next?`<span class="next-label" aria-label="Tahap berikutnya" title="Tahap berikutnya">→</span><strong class="next-name">${escapeHtml(next.name)}</strong><span class="next-duration">${minuteLabel(next.minutes)} menit</span>`:'<strong class="next-name">Tahap terakhir — selesaikan pembelajaran</strong>';
+        els.overallRemaining.textContent=mmss(overallLeft);
+        els.totalElapsed.textContent=mmss(overallPast);
+        updatePlayIcon();
+        els.playButton.disabled=state.finished;
+        els.prevButton.disabled=state.index===0;
+        els.nextButton.disabled=state.index===state.stages.length-1;
+        const diff=roundHalf(totalMs()/60000-state.target);
+        const ok=Math.abs(diff)<.001;
+        els.totalChip.classList.toggle('bad',!ok);
+        els.totalChip.textContent=ok?`✓ Rencana ${state.target} menit sesuai`: `⚠ Rencana ${minuteLabel(totalMs()/60000)} menit (${diff>0?'+':''}${minuteLabel(diff)} dari target)`;
+        els.balanceButton.disabled=ok||state.running;
+        els.autoToggle.checked=state.auto;
+        els.soundToggle.checked=state.sound;
+        els.wakeToggle.checked=state.wake;
+      }
+      function save(){
+        lastSaved=Date.now();
+        try{localStorage.setItem(STORE,JSON.stringify({...state,anchor:state.anchor,storedAt:Date.now()}));}catch(_){}
+      }
+      function load(){
+        try{
+          const parsed=JSON.parse(localStorage.getItem(STORE)||localStorage.getItem(OLD_STORE)||'null');
+          if(!parsed || !templates[parsed.target] || !Array.isArray(parsed.stages) || parsed.stages.length<1 || parsed.stages.length>35)return;
+          const ids=new Set();
+          const valid=parsed.stages.every(s=>{
+            if(!s||typeof s.id!=='string'||ids.has(s.id)||!Number.isFinite(s.minutes)||s.minutes<.5||s.minutes>180)return false;
+            ids.add(s.id);return true;
+          });
+          if(!valid)return;
+          state={...state,target:parsed.target,moduleTitle:String(parsed.moduleTitle||'Modul Ajar Diva').slice(0,120),modelName:String(parsed.modelName||'').slice(0,100),stages:parsed.stages.map(s=>({id:s.id,name:String(s.name||'Tahap Pembelajaran').slice(0,100),short:String(s.short||'TAHAP').slice(0,75),cue:String(s.cue||'').slice(0,700),minutes:s.minutes})),index:clamp(Math.floor(Number(parsed.index)||0),0,parsed.stages.length-1),elapsed:typeof parsed.elapsed==='object'&&parsed.elapsed?parsed.elapsed:{},running:!!parsed.running,anchor:Number(parsed.anchor)||Date.now(),auto:parsed.auto!==false,sound:!!parsed.sound,wake:!!parsed.wake,focus:false,lastEdited:parsed.lastEdited||null,warned:parsed.warned||{},finished:!!parsed.finished};
+          // Migrasi pengguna versi terdahulu: template lama yang belum dikustom
+          // diganti dengan template universal; pengaturan personal tetap dipertahankan.
+          const oldIds=['opening','orientation','organizing','investigation','presentation','evaluation','closing'];
+          const oldNames=['Pembukaan Pembelajaran','Orientasi pada Masalah','Mengorganisasi Peserta Didik','Membimbing Penyelidikan','Mengembangkan & Menyajikan Hasil','Menganalisis & Mengevaluasi Proses','Penutup Pembelajaran'];
+          const oldDescriptions=[
+            'Salam, doa, kesiapan belajar, apersepsi, dan tujuan',
+            'Gambar pemantik dan pertanyaan awal terkait permasalahan',
+            'Pembagian kelompok, peran, petunjuk aktivitas, dan LKM',
+            'Eksplorasi kasus, diskusi, analisis, dan pendampingan',
+            'Presentasi kelompok, tanggapan, dan tanya jawab',
+            'Penguatan konsep, evaluasi solusi, dan refleksi individual',
+            'Simpulan, tindak lanjut, apresiasi, dan salam'
+          ];
+          const unmodifiedOld=parsed.stages.length===oldIds.length && parsed.stages.every((stage,i)=>
+            stage.id===oldIds[i] && stage.name===oldNames[i] && stage.cue===oldDescriptions[i]);
+          if(unmodifiedOld){
+            state.stages=makeStages(state.target);state.index=0;state.elapsed={};state.running=false;state.anchor=0;state.finished=false;state.lastEdited=null;state.warned={};
+          }
+          if(state.running && (!parsed.storedAt || Date.now()-parsed.storedAt>1000*60*60*12)){
+            state.running=false;state.anchor=0;notice('Sesi lama dipulihkan dalam keadaan jeda.');
+          }
+        }catch(_){}
+      }
+      els.stages.addEventListener('click',e=>{
+        const btn=e.target.closest('[data-jump],[data-moveup],[data-movedown],[data-delete]');if(!btn)return;
+        if(btn.dataset.jump!==undefined)selectStage(Number(btn.dataset.jump));
+        else if(btn.dataset.moveup!==undefined)moveStage(btn.dataset.moveup,-1);
+        else if(btn.dataset.movedown!==undefined)moveStage(btn.dataset.movedown,1);
+        else if(btn.dataset.delete!==undefined)removeStage(btn.dataset.delete);
+      });
+      els.stages.addEventListener('change',e=>{
+        const inp=e.target;
+        if(inp.dataset.duration)changeDuration(inp.dataset.duration,inp.value);
+        else if(inp.dataset.name)changeField(inp.dataset.name,'name',inp.value);
+        else if(inp.dataset.short)changeField(inp.dataset.short,'short',inp.value);
+        else if(inp.dataset.cue)changeField(inp.dataset.cue,'cue',inp.value);
+      });
+      els.moduleTitleInput.addEventListener('change',e=>{state.moduleTitle=e.target.value.trim().slice(0,120)||'Modul Ajar Diva';save();paint();});
+      els.modelNameInput.addEventListener('input',e=>{state.modelName=e.target.value.trim().slice(0,100);save();});
+      $('addStageButton').addEventListener('click',addStage);
+      $('resetTemplateButton').addEventListener('click',resetTemplate);
+      $('exportButton').addEventListener('click',exportConfig);
+      // Muat konfigurasi JSON statis dari folder presets/ (cocok untuk GitHub Pages).
+      $('loadBundledPreset').addEventListener('click', async()=>{
+        if(state.running){notice('Jeda timer sebelum memuat preset.');return;}
+        const chosen=$('bundledPreset').value;
+        if(!/^presets\/[a-z0-9-]+\.json$/.test(chosen))return;
+        const button=$('loadBundledPreset');
+        button.disabled=true;
+        try{
+          const response=await fetch(chosen,{cache:'no-store'});
+          if(!response.ok)throw new Error('Preset tidak dapat diakses (HTTP '+response.status+').');
+          await importConfig(await response.blob());
+        }catch(error){notice('Gagal memuat preset: '+error.message+' Gunakan Impor Konfigurasi jika membuka HTML secara offline.');}
+        finally{button.disabled=false;}
+      });
+      $('importButton').addEventListener('click',()=>$('importFile').click());
+      $('importFile').addEventListener('change',e=>{importConfig(e.target.files?.[0]);e.target.value='';});
+      $('presetButtons').addEventListener('click',e=>{const b=e.target.closest('[data-preset]');if(b)applyPreset(Number(b.dataset.preset));});
+      els.playButton.addEventListener('click',play);
+      els.prevButton.addEventListener('click',()=>selectStage(state.index-1));
+      els.nextButton.addEventListener('click',()=>selectStage(state.index+1));
+      $('resetButton').addEventListener('click',resetPhase);
+      $('resetAllButton').addEventListener('click',resetAll);
+      els.balanceButton.addEventListener('click',balance);
+      $('restoreButton').addEventListener('click',resetAllocation);
+      els.autoToggle.addEventListener('change',e=>{state.auto=e.target.checked;save();});
+      els.soundToggle.addEventListener('change',e=>{state.sound=e.target.checked;if(state.sound)beep(1);save();});
+      els.wakeToggle.addEventListener('change',e=>{state.wake=e.target.checked;if(state.wake)requestWake();else releaseWake();save();if(state.wake&&!('wakeLock' in navigator))notice('Browser ini belum mendukung fitur cegah layar tidur.');});
+      // Gunakan kontrol yang SAMA di dua lokasi agar status, shortcut,
+      // dan seluruh event tetap sinkron tanpa duplikasi tombol.
+      const timerControls=document.querySelector('.timer-controls');
+      const headerNavSlot=$('headerNavSlot');
+      const timerCard=document.querySelector('.timer-card');
+      const timerBottom=document.querySelector('.timer-bottom');
+      function syncControlLocation(){
+        if(state.focus)headerNavSlot.appendChild(timerControls);
+        else timerCard.insertBefore(timerControls,timerBottom);
+      }
+      els.focusButton.addEventListener('click',()=>{
+        state.focus=!state.focus;
+        els.app.classList.toggle('focus-mode',state.focus);
+        syncControlLocation();
+        els.focusButton.textContent=state.focus?'◉ Kembali ke Pengaturan':'◉ Mode Fokus';
+      });
+      els.fullscreenButton.addEventListener('click',async()=>{try{if(!document.fullscreenElement)await document.documentElement.requestFullscreen();else await document.exitFullscreen();}catch(_){notice('Layar penuh tidak tersedia di browser ini.');}});
+      document.addEventListener('fullscreenchange',()=>{els.fullscreenButton.textContent=document.fullscreenElement?'⛶ Keluar Layar Penuh':'⛶ Layar Penuh';});
+      document.addEventListener('keydown',e=>{
+        const t=e.target;
+        if(t && (t.isContentEditable || ['INPUT','TEXTAREA','SELECT'].includes(t.tagName)))return;
+        if(e.code==='Space'){e.preventDefault();play();}
+        else if(e.key==='ArrowRight'){e.preventDefault();selectStage(state.index+1);}
+        else if(e.key==='ArrowLeft'){e.preventDefault();selectStage(state.index-1);}
+        else if(e.key.toLowerCase()==='r'){resetPhase();}
+        else if(e.key.toLowerCase()==='f'){els.fullscreenButton.click();}
+      });
+      document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){tick();requestWake();}else {releaseWake();save();}});
+      window.addEventListener('pagehide',save);
+      load();renderStages();paint();tick();setInterval(tick,180);
+    })();
+  </script>
+</body>
+</html>
