@@ -1,0 +1,64 @@
+{
+  "app": "UKin Focus Timer Universal",
+  "version": 3,
+  "moduleTitle": "Diva — [EXECUTE] UKin SAKUNALAR | Literasi Finansial Kelas IX",
+  "modelName": "Problem Based Learning (PBL)",
+  "target": 80,
+  "options": {
+    "auto": true,
+    "sound": false,
+    "wake": false
+  },
+  "stages": [
+    {
+      "id": "diva-execute-pendahuluan-1",
+      "name": "Pendahuluan",
+      "short": "PENDAHULUAN",
+      "cue": "Salam dan doa (1), Saka Bilang! (2), apersepsi uang saku (2), video pemantik dan asesmen awal (2), tujuan dan motivasi (1).",
+      "minutes": 8
+    },
+    {
+      "id": "diva-execute-orientasi-masalah-2",
+      "name": "Orientasi Masalah",
+      "short": "SINTAKS 1 · MEMAHAMI",
+      "cue": "Penguatan konsep literasi finansial (2), pengamatan ilustrasi kantin (1), dan analisis awal masalah (3).",
+      "minutes": 6
+    },
+    {
+      "id": "diva-execute-mengorganisasikan-murid-3",
+      "name": "Mengorganisasikan Murid",
+      "short": "SINTAKS 2 · MEMAHAMI",
+      "cue": "Bentuk 6 kelompok dan peran (2); akses SAKUNALAR, QR, petunjuk LKM, serta presentasi (2).",
+      "minutes": 4
+    },
+    {
+      "id": "diva-execute-penyelidikan-kelompok-4",
+      "name": "Penyelidikan Kelompok",
+      "short": "SINTAKS 3 · MEMAHAMI & MENGAPLIKASI",
+      "cue": "Murid membaca komik dan Bank Materi lalu berdiskusi, menjawab 4 pertanyaan LKM, dan mempersiapkan hasil.",
+      "minutes": 10
+    },
+    {
+      "id": "diva-execute-mengembangkan-&-menyajikan-hasil-5",
+      "name": "Mengembangkan & Menyajikan Hasil",
+      "short": "SINTAKS 4 · MENGAPLIKASI",
+      "cue": "Aturan presentasi (2); enam kelompok masing-masing 4 menit (24); transisi antarkelompok (1).",
+      "minutes": 27
+    },
+    {
+      "id": "diva-execute-analisis-&-evaluasi-6",
+      "name": "Analisis & Evaluasi",
+      "short": "SINTAKS 5 · MENGAPLIKASI & MEREFLEKSI",
+      "cue": "Evaluasi solusi (3), mini-game enam kartu (6), dan simulasi skala prioritas (6).",
+      "minutes": 15
+    },
+    {
+      "id": "diva-execute-penutup-7",
+      "name": "Penutup",
+      "short": "PENUTUP",
+      "cue": "Asesmen kelompok (3), Exit Ticket (2), kesimpulan (1), umpan balik (1), tindak lanjut (1), materi berikutnya (1), doa (1).",
+      "minutes": 10
+    }
+  ],
+  "exportedAt": "2026-11-12T00:00:00+07:00"
+}

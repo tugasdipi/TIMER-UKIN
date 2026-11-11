@@ -1,0 +1,63 @@
+{
+  "app": "UKin Focus Timer Universal",
+  "version": 3,
+  "moduleTitle": "Reza Bayu Pratama — Adaptasi Dampak Perubahan Iklim",
+  "modelName": "Problem Based Learning (PBL)",
+  "target": 80,
+  "stages": [
+    {
+      "id": "bayu-pendahuluan",
+      "name": "Pendahuluan",
+      "short": "PEMBUKAAN",
+      "cue": "Salam, doa, presensi, dan apersepsi cuaca–iklim.\nTepuk Iklim, motivasi, serta penyampaian tujuan pembelajaran.",
+      "minutes": 10
+    },
+    {
+      "id": "bayu-sintaks-1",
+      "name": "Orientasi Masalah",
+      "short": "SINTAKS 1 · MEMAHAMI",
+      "cue": "Jelaskan perubahan iklim, penyebab, serta dampaknya.\nAmati fenomena dan kasus kekeringan Desa Sukamaju; jawab pertanyaan pemantik.",
+      "minutes": 8
+    },
+    {
+      "id": "bayu-sintaks-2",
+      "name": "Organisasi Murid",
+      "short": "SINTAKS 2 · MEMAHAMI",
+      "cue": "Bagi murid menjadi 4 kelompok dan bagikan LKM.\nJelaskan petunjuk, fokus penyelidikan, dan pembagian peran.",
+      "minutes": 5
+    },
+    {
+      "id": "bayu-sintaks-3",
+      "name": "Penyelidikan Kelompok",
+      "short": "SINTAKS 3 · MENGAPLIKASI",
+      "cue": "Analisis kasus kekeringan: masalah, dampak, dan adaptasi.\nDiskusikan fokus kelompok, isi LKM, dan lakukan bimbingan.",
+      "minutes": 20
+    },
+    {
+      "id": "bayu-sintaks-4",
+      "name": "Menyajikan Hasil",
+      "short": "SINTAKS 4 · MENGAPLIKASI",
+      "cue": "Empat kelompok mempresentasikan hasil penyelidikan.\nBerikan kesempatan tanggapan, tanya jawab, dan penguatan guru.",
+      "minutes": 17
+    },
+    {
+      "id": "bayu-sintaks-5",
+      "name": "Analisis & Evaluasi",
+      "short": "SINTAKS 5 · MEREFLEKSI",
+      "cue": "Bandingkan manfaat dan keterbatasan solusi yang dipilih.\nTegaskan adaptasi, mitigasi perubahan iklim, dan mitigasi bencana.",
+      "minutes": 10
+    },
+    {
+      "id": "bayu-penutup",
+      "name": "Penutup",
+      "short": "PENUTUP",
+      "cue": "Simpulan, evaluasi individu, refleksi, dan penguatan.\nTindak lanjut pengamatan lingkungan; tutup dengan doa dan salam.",
+      "minutes": 10
+    }
+  ],
+  "options": {
+    "auto": true,
+    "sound": false,
+    "wake": false
+  }
+}

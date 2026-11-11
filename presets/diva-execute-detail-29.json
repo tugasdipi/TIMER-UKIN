@@ -1,0 +1,218 @@
+{
+  "app": "UKin Focus Timer Universal",
+  "version": 3,
+  "moduleTitle": "Diva — [EXECUTE] UKin SAKUNALAR | Literasi Finansial Kelas IX",
+  "modelName": "Problem Based Learning (PBL)",
+  "target": 80,
+  "options": {
+    "auto": true,
+    "sound": false,
+    "wake": false
+  },
+  "stages": [
+    {
+      "id": "diva-execute-01",
+      "name": "Orientasi: Salam, Doa, Presensi",
+      "short": "PENDAHULUAN",
+      "cue": "Salam, doa, cek kehadiran dan kesiapan murid untuk belajar.",
+      "minutes": 1
+    },
+    {
+      "id": "diva-execute-02",
+      "name": "Ice Breaking · Saka Bilang!",
+      "short": "PENDAHULUAN",
+      "cue": "Murid mengikuti instruksi hanya jika diawali “Saka bilang”, untuk melatih konsentrasi.",
+      "minutes": 2
+    },
+    {
+      "id": "diva-execute-03",
+      "name": "Apersepsi Uang Saku",
+      "short": "PENDAHULUAN",
+      "cue": "Murid menceritakan pengalaman menggunakan uang saku; kaitkan dengan prioritas penggunaan uang.",
+      "minutes": 2
+    },
+    {
+      "id": "diva-execute-04",
+      "name": "Video Pemantik & Asesmen Awal",
+      "short": "PENDAHULUAN",
+      "cue": "Tonton video 15 detik: sepatu rusak atau headphone promo. Murid memilih prioritas dan menjelaskan alasannya.",
+      "minutes": 2
+    },
+    {
+      "id": "diva-execute-05",
+      "name": "Tujuan & Motivasi",
+      "short": "PENDAHULUAN",
+      "cue": "Sampaikan tujuan dan manfaat literasi finansial; dorong murid aktif dan berani berpendapat.",
+      "minutes": 1
+    },
+    {
+      "id": "diva-execute-06",
+      "name": "Penguatan Konsep Awal",
+      "short": "SINTAKS 1 · ORIENTASI MASALAH",
+      "cue": "Murid menyimak konsep literasi finansial, lima aspek, serta skala prioritas.",
+      "minutes": 2
+    },
+    {
+      "id": "diva-execute-07",
+      "name": "Pengamatan Masalah",
+      "short": "SINTAKS 1 · ORIENTASI MASALAH",
+      "cue": "Murid mengamati ilustrasi permasalahan penggunaan uang di kantin sekolah.",
+      "minutes": 1
+    },
+    {
+      "id": "diva-execute-08",
+      "name": "Analisis Awal Masalah",
+      "short": "SINTAKS 1 · ORIENTASI MASALAH",
+      "cue": "Murid menjelaskan masalah pada ilustrasi; hubungkan jawaban dengan materi yang dipelajari.",
+      "minutes": 3
+    },
+    {
+      "id": "diva-execute-09",
+      "name": "Pembentukan Enam Kelompok",
+      "short": "SINTAKS 2 · ORGANISASI MURID",
+      "cue": "Bagi 6 kelompok, bagikan LKM, lalu tentukan peran setiap anggota agar semua terlibat.",
+      "minutes": 2
+    },
+    {
+      "id": "diva-execute-10",
+      "name": "Akses SAKUNALAR & Petunjuk LKM",
+      "short": "SINTAKS 2 · ORGANISASI MURID",
+      "cue": "Tampilkan QR SAKUNALAR; siapkan satu gawai per kelompok dan jelaskan 4 soal LKM serta aturan presentasi.",
+      "minutes": 2
+    },
+    {
+      "id": "diva-execute-11",
+      "name": "Penyelidikan Komik & LKM",
+      "short": "SINTAKS 3 · PENYELIDIKAN",
+      "cue": "Murid membaca Bank Materi dan komik kasus, menjawab empat pertanyaan LKM, memeriksa jawaban; guru mendampingi.",
+      "minutes": 10
+    },
+    {
+      "id": "diva-execute-12",
+      "name": "Persiapan Presentasi",
+      "short": "SINTAKS 4 · PENYAJIAN HASIL",
+      "cue": "Jelaskan aturan presentasi dan siapkan timer; murid menentukan wakil penyaji.",
+      "minutes": 2
+    },
+    {
+      "id": "diva-execute-13",
+      "name": "Presentasi Kelompok 1 · Rani",
+      "short": "SINTAKS 4 · PENYAJIAN HASIL",
+      "cue": "Kelompok 1 menyajikan masalah, fakta, dua solusi dan keputusan (2 menit); pertanyaan dan diskusi (1 menit); tanggapan (1 menit).",
+      "minutes": 4
+    },
+    {
+      "id": "diva-execute-14",
+      "name": "Presentasi Kelompok 2 · Bima",
+      "short": "SINTAKS 4 · PENYAJIAN HASIL",
+      "cue": "Kelompok 2 menyajikan masalah, fakta, dua solusi dan keputusan (2 menit); pertanyaan dan diskusi (1 menit); tanggapan (1 menit).",
+      "minutes": 4
+    },
+    {
+      "id": "diva-execute-15",
+      "name": "Presentasi Kelompok 3 · Sinta",
+      "short": "SINTAKS 4 · PENYAJIAN HASIL",
+      "cue": "Kelompok 3 menyajikan masalah, fakta, dua solusi dan keputusan (2 menit); pertanyaan dan diskusi (1 menit); tanggapan (1 menit).",
+      "minutes": 4
+    },
+    {
+      "id": "diva-execute-16",
+      "name": "Transisi Antarkelompok",
+      "short": "SINTAKS 4 · PENYAJIAN HASIL",
+      "cue": "Alokasi transisi 1 menit yang dicantumkan pada modul untuk perpindahan presentasi antarkelompok.",
+      "minutes": 1
+    },
+    {
+      "id": "diva-execute-17",
+      "name": "Presentasi Kelompok 4 · Aldi",
+      "short": "SINTAKS 4 · PENYAJIAN HASIL",
+      "cue": "Kelompok 4 menyajikan masalah, fakta, dua solusi dan keputusan (2 menit); pertanyaan dan diskusi (1 menit); tanggapan (1 menit).",
+      "minutes": 4
+    },
+    {
+      "id": "diva-execute-18",
+      "name": "Presentasi Kelompok 5 · Naya",
+      "short": "SINTAKS 4 · PENYAJIAN HASIL",
+      "cue": "Kelompok 5 menyajikan masalah, fakta, dua solusi dan keputusan (2 menit); pertanyaan dan diskusi (1 menit); tanggapan (1 menit).",
+      "minutes": 4
+    },
+    {
+      "id": "diva-execute-19",
+      "name": "Presentasi Kelompok 6 · Fajar",
+      "short": "SINTAKS 4 · PENYAJIAN HASIL",
+      "cue": "Kelompok 6 menyajikan masalah, fakta, dua solusi dan keputusan (2 menit); pertanyaan dan diskusi (1 menit); tanggapan (1 menit).",
+      "minutes": 4
+    },
+    {
+      "id": "diva-execute-20",
+      "name": "Evaluasi Hasil Diskusi",
+      "short": "SINTAKS 5 · ANALISIS & EVALUASI",
+      "cue": "Murid dan guru mengevaluasi ketepatan solusi, alasan, serta dampak keputusan dari hasil presentasi.",
+      "minutes": 3
+    },
+    {
+      "id": "diva-execute-21",
+      "name": "Mini-Game Enam Kartu",
+      "short": "SINTAKS 5 · ANALISIS & EVALUASI",
+      "cue": "Tampilkan 6 kartu keputusan di SAKUNALAR. Murid menilai keputusan bijak/perlu dipikir ulang beserta alasan.",
+      "minutes": 6
+    },
+    {
+      "id": "diva-execute-22",
+      "name": "Simulasi Skala Prioritas",
+      "short": "SINTAKS 5 · ANALISIS & EVALUASI",
+      "cue": "Simulasikan uang saku melalui SAKUNALAR; murid mengalokasikan kebutuhan, keinginan, dan tabungan.",
+      "minutes": 6
+    },
+    {
+      "id": "diva-execute-23",
+      "name": "Asesmen Digital Kelompok",
+      "short": "PENUTUP",
+      "cue": "Enam kelompok menjawab 6 soal digital di SAKUNALAR, mencatat Kode Hasil, dan menyerahkan LKM.",
+      "minutes": 3
+    },
+    {
+      "id": "diva-execute-24",
+      "name": "Refleksi Individu · Exit Ticket",
+      "short": "PENUTUP",
+      "cue": "Murid mengisi Exit Ticket secara individu pada lembar cetak.",
+      "minutes": 2
+    },
+    {
+      "id": "diva-execute-25",
+      "name": "Kesimpulan Bersama",
+      "short": "PENUTUP",
+      "cue": "Simpulkan kebutuhan, tabungan, amanah, verifikasi transaksi, berbagi, dan keamanan PIN/OTP.",
+      "minutes": 1
+    },
+    {
+      "id": "diva-execute-26",
+      "name": "Umpan Balik & Apresiasi",
+      "short": "PENUTUP",
+      "cue": "Berikan umpan balik singkat dan apresiasi atas kerja sama serta keberanian berpendapat.",
+      "minutes": 1
+    },
+    {
+      "id": "diva-execute-27",
+      "name": "Tindak Lanjut",
+      "short": "PENUTUP",
+      "cue": "Sampaikan pendampingan untuk murid yang perlu bantuan dan pengayaan perencanaan uang saku.",
+      "minutes": 1
+    },
+    {
+      "id": "diva-execute-28",
+      "name": "Materi Berikutnya & Kerapian",
+      "short": "PENUTUP",
+      "cue": "Sampaikan gambaran materi berikutnya; murid merapikan perlengkapan belajar.",
+      "minutes": 1
+    },
+    {
+      "id": "diva-execute-29",
+      "name": "Doa & Salam Penutup",
+      "short": "PENUTUP",
+      "cue": "Murid dan guru berdoa sesuai keyakinan lalu menutup kegiatan dengan salam.",
+      "minutes": 1
+    }
+  ],
+  "exportedAt": "2026-11-12T00:00:00+07:00"
+}
